@@ -12,13 +12,13 @@ public class Book {
 	private String author;
 	private String release;
 	private String preface;
+	private int rentingUserId;
 
 	public Book() {
 	}
 
-	public Book(int id, String name, String author, String release, String preface) {
+	public Book(String name, String author, String release, String preface) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.author = author;
 		this.release = release;
@@ -63,5 +63,13 @@ public class Book {
 
 	public void setPreface(String preface) {
 		this.preface = preface;
+	}
+
+	public int getRentingUserId() {
+		return rentingUserId;
+	}
+
+	public void setRentingUserId(int rentingUserId) {
+		this.rentingUserId = rentingUserId;
 	}
 }

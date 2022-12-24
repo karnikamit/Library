@@ -1,7 +1,5 @@
 package io.springworks.models;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -11,7 +9,7 @@ public class User {
 	@Id
 	private int id;
 	private String name;
-	private List<String> books;
+	private Boolean haveRentedBook = false;
 
 	public User() {
 	}
@@ -38,12 +36,12 @@ public class User {
 		this.name = name;
 	}
 
-	public List<String> getBooks() {
-		return books;
+	public Boolean getHavRentedBook() {
+		return haveRentedBook;
 	}
 
-	public void setBooks(List<String> books) {
-		this.books = books;
+	public void setHavRentedBook(Boolean havRentedBook) {
+		this.haveRentedBook = havRentedBook;
 	}
 
 }
