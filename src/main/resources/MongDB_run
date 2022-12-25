@@ -1,0 +1,55 @@
+Install MongoDB
+1. brew tap mongodb/brew
+2. brew update
+3. brew install mongodb-community@6.0
+
+
+Run MongoDB Community Edition
+ # brew services start mongodb-community@6.0 or brew services start mongodb/brew/mongodb-community
+ 
+ List mongo service if started cehck
+ # brew services list
+
+
+ Stop MongoDB
+ # brew services stop mongodb-community@6.0
+ 
+ To run MongoDB (i.e. the mongod process) manually as a background process, run:
+
+ # mongod --config /usr/local/etc/mongod.conf --fork
+ 
+ 
+ Connect and Use MongoDB
+To begin using MongoDB, connect 
+mongosh
+ to the running instance. From a new terminal, issue the following:
+
+# mongosh
+
+
+ 
+ Run Commands
+To run commands in mongosh, you must first connect to a MongoDB deployment.
+
+Switch Databases
+To display the database you are using, type db:
+
+db
+
+The operation should return test, which is the default database.
+
+To switch databases, issue the use <db> helper, as in the following example:
+
+# use <database>
+
+To access a different database from the current database without switching your current database context, see the 
+db.getSiblingDB() method.
+
+To list the databases available to the user, use the helper show dbs.
+
+Create a New Database and Collection
+To create a new database, issue the use <db> command with the database that you would like to create. For example, the following commands create both the database myNewDatabase and the 
+collection myCollection using the insertOne() operation:
+
+# use myNewDatabase
+# db.myCollection.insertOne( { x: 1 } );

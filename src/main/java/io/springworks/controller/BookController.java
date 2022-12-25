@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.springworks.models.Book;
+import io.springworks.models.Response;
 import io.springworks.service.BookService;
 
 @RestController
@@ -40,25 +42,48 @@ public class BookController {
 
 	// http://localhost:8080/api/v1/book/get?id=1
 	@GetMapping("/get")
-	public List<Book> getBook(@RequestParam("id") int id) {
+	public Response getBook(@RequestParam("id") int id) {
+		Response response = new Response();
 		logger.info("Requesting book with ID: {}", id);
 		List<Book> books = bookService.getbook(id);
-		return books;
+		if(CollectionUtils.isEmpty(books)) {
+			response.setHttpStatus(HttpStatus.NOT_FOUND);
+			response.setErrorCode(HttpStatus.NOT_FOUND.value());
+		}else {
+			response.setIsSuccessful(Boolean.TRUE);
+			response.setObjects(books);
+			response.setHttpStatus(HttpStatus.FOUND);
+		}
+		return response;
 	}
 
 	@PostMapping("/add")
-	public HttpStatus addBook(@RequestBody Book book){
+	public Response addBook(@RequestBody Book book){
+		Response response = new Response();
+		if(book == null) {
+			response.setHttpStatus(HttpStatus.BAD_REQUEST);
+			response.setErrorCode(HttpStatus.BAD_REQUEST.value());
+			return response;
+		}
+		response.setIsSuccessful(Boolean.TRUE);
+		response.setHttpStatus(HttpStatus.ACCEPTED);
 		bookId+=1;
 		book.setId(bookId);
 		bookService.addBook(book);
+		List<Book> books = new ArrayList<>();
+		books.add(book);
+		response.setObjects(books);
 		logger.info("Successfully added book to library: Book - Autor:{}, Name: {}", book.getAuthor(), book.getName());
-		return HttpStatus.ACCEPTED;
+		return response;
 	}
 
 	@DeleteMapping("/delete")
-	public HttpStatus deleteBook(@RequestParam("id") int id) {
+	public Response deleteBook(@RequestParam("id") int id) {
+		Response response = new Response();
+		response.setIsSuccessful(Boolean.TRUE);
+		response.setHttpStatus(HttpStatus.ACCEPTED);
 		bookService.deleteBook(id);
 		logger.info("Removing book with id - {} form library", id);
-		return HttpStatus.OK;
+		return response;
 	}
 }
