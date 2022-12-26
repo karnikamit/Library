@@ -4,6 +4,8 @@ import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,6 +20,7 @@ public class RabbitMQConfig {
 	}
 
 	@Bean
+	@Qualifier("userQueue")
 	public Queue userQueue() {
 		return new Queue(RabbitMQConstants.USER_QUEUE_NAME);
 	}
@@ -33,6 +36,7 @@ public class RabbitMQConfig {
 	}
 
 	@Bean
+	@Qualifier("bookQueue")
 	public Queue bookQueue() {
 		return new Queue(RabbitMQConstants.BOOK_QUEUE_NAME);
 	}
@@ -48,6 +52,7 @@ public class RabbitMQConfig {
 	}
 
 	@Bean
+	@Qualifier("ledgerQueue")
 	public Queue ledgerQueue() {
 		return new Queue(RabbitMQConstants.LEDGER_QUEUE_NAME);
 	}
@@ -56,4 +61,9 @@ public class RabbitMQConfig {
 	public Binding ledgerToExchangeBinding() {
 		return BindingBuilder.bind(ledgerQueue()).to(ledgerTopicExchange()).with(RabbitMQConstants.LEDGER_ROUTING_KEY);
 	}
+
+	@Bean
+    public Jackson2JsonMessageConverter converter() {
+        return new Jackson2JsonMessageConverter();
+    }
 }

@@ -81,7 +81,7 @@ public class BookService {
 		}
 		Book book = books.get(0);
 		if(book.getRentingUserId() != 0) {
-			logger.error("Book is already borrowed by the user ", book.getRentingUserId());
+			logger.error("Book is already borrowed by a user ", book.getRentingUserId());
 			return -1;
 		}
 		book.setRentingUserId(userId);

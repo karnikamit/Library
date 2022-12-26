@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.springworks.exceptions.LibraryExceptions;
 import io.springworks.models.Ledger;
 import io.springworks.models.Response;
+import io.springworks.producer.LibraryProducer;
 import io.springworks.service.LibraryService;
 
 @RestController
@@ -27,6 +28,9 @@ public class LibraryController {
 
 	@Autowired
 	LibraryService libService;
+
+	@Autowired
+	LibraryProducer libProducer;
 
 	@PostMapping("/rent")
 	public Response rentBook(@RequestBody Ledger record) {
@@ -57,6 +61,11 @@ public class LibraryController {
 			logger.error("INTERNAL_SERVER_ERROR!");
 		}
 		return response;
+	}
+
+	@PostMapping("/rentBook")
+	public void rentBookMessage(@RequestBody Ledger record) {
+		libProducer.rentBook(record);
 	}
 
 	@PostMapping("/return")

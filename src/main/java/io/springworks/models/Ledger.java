@@ -8,6 +8,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("Records")
 public class Ledger {
 
+	public Ledger() {
+
+	}
+
 	@Id
 	private int id;
 	private int userId;
