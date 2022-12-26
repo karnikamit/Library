@@ -1,0 +1,8 @@
+1. Build docker file
+	- Add "Dockerfile" in root dir
+	- Add args (refer Dockerfile of this project)
+	- build docker image with docker command from root location of your project where Dockerfile is present
+		#docker build -t <image tag *ALL in small letters> .
+2. Run in docker container
+	#docker run <built docker image> -p7070
+
