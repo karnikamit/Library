@@ -1,15 +1,19 @@
 package io.springworks.models;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.persistence.Id;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Document("Users")
 public class User {
 
 	@Id
 	private int id;
 	private String name;
+	private List<Map<String, String>> contactDetails;
 
 	public int getId() {
 		return id;
@@ -22,6 +26,12 @@ public class User {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public List<Map<String, String>> getContactDetails() {
+		return contactDetails;
+	}
+	public void setContactDetails(List<Map<String, String>> contactDetails) {
+		this.contactDetails = contactDetails;
 	}
 
 }

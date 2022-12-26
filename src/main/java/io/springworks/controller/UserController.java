@@ -64,16 +64,16 @@ public class UserController {
 			logger.error("Invalid user object received");
 			return response;
 		}
-		logger.info("Adding User - {}", "");
-		int userId = userService.addUser(user);
+		logger.info("Adding User - {}", user.getName());
+		userService.addUser(user);
 		Map<String, Integer> userObject = new HashMap<>();
 		List<Map<String, Integer>> userList = new ArrayList<>();
-		userObject.put("userId", userId);
+		userObject.put("userId", ControllerConstants.userId);
 		userList.add(userObject);
-		logger.info("User added with id: {}", userId);
+		logger.info("User added with id: {}", ControllerConstants.userId);
 		response.setIsSuccessful(Boolean.TRUE);
 		response.setHttpStatus(HttpStatus.ACCEPTED);
-		response.setObjects(userList);
+//		response.setObjects(userList);
 		return response;
 	}
 

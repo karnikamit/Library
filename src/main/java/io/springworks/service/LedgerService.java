@@ -8,8 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
-
+import io.springworks.controller.ControllerConstants;
 import io.springworks.models.Ledger;
 import io.springworks.repos.LedgerRepo;
 
@@ -42,9 +41,9 @@ public class LedgerService {
 			logger.error("Not valid Ledger object received, aborting!");
 			return -1;
 		}
-		ledgerId += 1;
-		record.setId(ledgerId);
+		ControllerConstants.ledgerId += 1;
+		record.setId(ControllerConstants.ledgerId);
 		ledgerRepo.save(record);
-		return ledgerId;
+		return ControllerConstants.ledgerId;
 	}
 }

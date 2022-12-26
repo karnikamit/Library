@@ -32,11 +32,9 @@ public class LedgerController {
 	@Autowired
 	LedgerService ledgerService;
 
-	@Autowired
-	Response response;
-
 	@GetMapping("/records")
 	public Response getRecords() {
+		Response response = new Response();
 		List<Ledger> records = ledgerService.getRecords();
 		if(CollectionUtils.isEmpty(records)) {
 			response.setHttpStatus(HttpStatus.NOT_FOUND);
@@ -54,6 +52,7 @@ public class LedgerController {
 
 	@GetMapping("/id")
 	public Response getRecord(@RequestParam("id") int id) {
+		Response response = new Response();
 		List<Ledger> records = new ArrayList<>();
 		Ledger record = ledgerService.getRecord(id);
 		if(record == null) {
@@ -71,6 +70,7 @@ public class LedgerController {
 
 	@PostMapping("/addRecord")
 	public Response addRecord(@RequestBody Ledger record) {
+		Response response = new Response();
 		if(record == null) {
 			response.setIsSuccessful(Boolean.FALSE);
 			response.setHttpStatus(HttpStatus.BAD_REQUEST);
@@ -100,6 +100,7 @@ public class LedgerController {
 
 	@DeleteMapping("/deleteRecord")
 	public Response deleteRecord(@RequestParam("id") int id) {
+		Response response = new Response();
 		response.setIsSuccessful(Boolean.FALSE);
 		response.setHttpStatus(HttpStatus.FORBIDDEN);
 		response.setErrorCode(HttpStatus.FORBIDDEN.value());

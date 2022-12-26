@@ -4,7 +4,7 @@ import javax.persistence.Id;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Document("Books")
 public class Book {
 
 	@Id
@@ -14,17 +14,6 @@ public class Book {
 	private String release;
 	private String preface;
 	private int rentingUserId;
-
-	public Book() {
-	}
-
-	public Book(String name, String author, String release, String preface) {
-		super();
-		this.name = name;
-		this.author = author;
-		this.release = release;
-		this.preface = preface;
-	}
 
 	public int getId() {
 		return id;

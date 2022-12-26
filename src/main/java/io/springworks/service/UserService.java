@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import io.springworks.controller.ControllerConstants;
 import io.springworks.models.User;
 import io.springworks.repos.UserRepo;
 
@@ -20,8 +21,6 @@ public class UserService {
 
 	@Autowired
 	UserRepo userRepo;
-
-	protected int userId = 000;
 
 	public List<User> getUser(int id){
 		List<User> users = new ArrayList<>();
@@ -40,11 +39,11 @@ public class UserService {
 			logger.error("Invalid User object to add!");
 			return -1;
 		}
-		userId += 1;
-		user.setId(userId);
+		ControllerConstants.userId += 1;
+		user.setId(ControllerConstants.userId);
 		userRepo.save(user);
-		logger.info("Sucessfully updated the record with new User: ID - {}, Name - {}", userId, user.getName());
-		return userId;
+		logger.info("Sucessfully updated the record with new User: ID - {}, Name - {}", ControllerConstants.userId, user.getName());
+		return ControllerConstants.userId;
 	}
 
 	public Boolean deleteUser(int id) {
