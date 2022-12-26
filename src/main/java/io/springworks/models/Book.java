@@ -1,9 +1,10 @@
 package io.springworks.models;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document("Books")
 public class Book {
 
 	@Id
@@ -12,18 +13,7 @@ public class Book {
 	private String author;
 	private String release;
 	private String preface;
-
-	public Book() {
-	}
-
-	public Book(int id, String name, String author, String release, String preface) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.author = author;
-		this.release = release;
-		this.preface = preface;
-	}
+	private int rentingUserId;
 
 	public int getId() {
 		return id;
@@ -63,5 +53,13 @@ public class Book {
 
 	public void setPreface(String preface) {
 		this.preface = preface;
+	}
+
+	public int getRentingUserId() {
+		return rentingUserId;
+	}
+
+	public void setRentingUserId(int rentingUserId) {
+		this.rentingUserId = rentingUserId;
 	}
 }

@@ -1,49 +1,37 @@
 package io.springworks.models;
 
 import java.util.List;
+import java.util.Map;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document("Users")
 public class User {
 
 	@Id
 	private int id;
 	private String name;
-	private List<String> books;
-
-	public User() {
-	}
-
-	public User(int id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
-	}
+	private List<Map<String, String>> contactDetails;
 
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public List<String> getBooks() {
-		return books;
+	public List<Map<String, String>> getContactDetails() {
+		return contactDetails;
 	}
-
-	public void setBooks(List<String> books) {
-		this.books = books;
+	public void setContactDetails(List<Map<String, String>> contactDetails) {
+		this.contactDetails = contactDetails;
 	}
 
 }
