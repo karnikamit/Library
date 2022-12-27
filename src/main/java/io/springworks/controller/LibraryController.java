@@ -20,7 +20,7 @@ import io.springworks.models.Response;
 import io.springworks.service.LibraryService;
 
 @RestController
-@RequestMapping("/api/v1/library")
+@RequestMapping("/library")
 public class LibraryController {
 
 	private static Logger logger = LoggerFactory.getLogger(LibraryController.class);
